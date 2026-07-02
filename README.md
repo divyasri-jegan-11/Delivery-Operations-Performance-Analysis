@@ -1,86 +1,381 @@
-#  Delivery Operations & Performance Analysis
+# 🍽️ Delivery Operations & Performance Analysis
+### End-to-End SQL Analytics Case Study for a Food Delivery Platform
 
- Food Delivery Crisis Recovery Analytics
-
-## Problem Statement
-The food delivery platform operates across multiple cities with high order volumes and a large network of restaurants and delivery partners.
-However, despite strong demand, the business faces persistent challenges such as **order cancellations, delivery delays, SLA breaches, and declining customer ratings,** all of which contribute to hidden revenue loss.
-
-The key challenge is not demand generation, but inefficiencies in operations that negatively affect customer experience and revenue realization.
-
-## Project Overview
-This project analyzes a food delivery platform using **SQL‑driven analytics** to identify
-operational inefficiencies, customer experience issues, and revenue leakage.
-
-The goal of the analysis is to demonstrate how data analytics can support
-**business decision‑making** by connecting operations → customer experience → revenue impact.
+> An end-to-end business analytics project that investigates operational inefficiencies, customer experience, and revenue leakage within a food delivery platform using SQL, Python, and Power BI.
 
 ---
 
-##  Business Problem
-The food delivery platform operates across multiple cities with a large network of restaurants
-and delivery partners. Despite high order volumes, the platform faces challenges such as:
-- High order cancellations
-- Delivery delays (SLA breaches)
+## Executive Summary
+
+Food delivery platforms operate in a highly competitive environment where operational efficiency directly influences customer satisfaction, customer retention, and revenue growth.
+
+This project analyzes **149,166 food delivery orders** to evaluate operational performance across multiple cities. Using **SQL for business analysis**, **Python for data exploration**, and **Power BI for executive reporting**, the project identifies key operational bottlenecks affecting delivery performance and quantifies their business impact.
+
+The analysis connects **delivery operations → customer experience → financial performance**, demonstrating how data-driven decision-making can improve operational efficiency and business outcomes.
+
+---
+
+## Business Context
+
+As the platform expanded across multiple metropolitan cities, increasing order volumes exposed several operational challenges, including:
+
+- High order cancellation rates
+- Frequent delivery delays
+- SLA breaches
 - Declining customer ratings
-- Potential revenue loss
+- Revenue leakage due to failed deliveries
 
-This project aims to diagnose **where the problems occur, why they occur, and how much they cost the business**.
-
----
-
-##  Analytical Framework
-The analysis is structured into **four business-focused blocks**:
-
-1. **Platform Supply & Presence**  
-   Understanding restaurant and delivery partner distribution across cities.
-
-2. **Pricing & Order Value (AOV)**  
-   Analyzing customer spending behavior and pricing power across cities and cuisines.
-
-3. **Operational Efficiency**  
-   Measuring cancellations, delivery delays, and SLA breaches.
-
-4. **Customer Experience & Revenue Impact**  
-   Evaluating ratings and estimating revenue loss due to cancellations.
+Rather than a lack of customer demand, the primary business challenge lies in operational inefficiencies that reduce customer satisfaction and negatively impact profitability.
 
 ---
 
-##  Insights from the analysis
-- The analysis reveals that **platform demand and revenue are highly concentrated in metro cities**, with Bengaluru emerging as the primary revenue and order‑volume driver, followed by Mumbai and Delhi. While these cities generate strong demand, mid‑tier cities show signs of **under‑monetization**, indicating untapped revenue potential.
+# Business Problem
 
-- Average Order Value varies across cities, with high‑volume locations relying more on **order quantity rather than higher basket value**. This suggests price sensitivity and heavy discounting, limiting revenue scalability despite strong demand.
+The platform requires an analytical assessment to answer the following questions:
 
-- Cancellation rates remain consistently high across cities, indicating **system‑wide operational issues rather than isolated problems**. High‑demand cities contribute the most to absolute revenue loss due to their large order volumes.
+- Where are operational inefficiencies occurring?
+- Which cities contribute the most revenue?
+- How efficiently are deliveries being completed?
+- How do delivery delays affect customer satisfaction?
+- How much revenue is lost through cancelled orders?
+- Which operational improvements should be prioritized?
 
-- Delivery time analysis shows that **longer delivery durations and SLA breaches are directly associated with lower customer ratings**. This establishes a clear link between operational performance and customer experience.
-
-- Overall, the findings demonstrate a strong relationship between **delivery efficiency, customer satisfaction, and revenue realization**, where operational inefficiencies directly suppress business value.
-
----
-
-##  Tools & Technologies Used
-- **SQL** – Core data analysis and business logic
-- **Python (Google Colab)** – Data exploration and query execution
-- **Power BI** – 1‑page executive dashboard
-- **Notion** – Project documentation and storytelling
+The objective is to transform operational data into actionable business insights that support strategic decision-making.
 
 ---
 
-##  Data Schema
-The project uses anonymized CSV‑based data modeled using fact and dimension tables.
+# Business Objectives
 
-- Fact tables store transactional and operational data
-- Dimension tables provide contextual information (city, restaurant, customer, delivery partner)
+The project aims to:
 
-Detailed schema documentation is available in `data/data_schema.md`.
+- Analyze platform performance across multiple cities.
+- Evaluate restaurant and delivery partner distribution.
+- Measure Average Order Value (AOV) across locations.
+- Quantify delivery performance using SLA metrics.
+- Identify operational drivers behind order cancellations.
+- Assess the relationship between delivery performance and customer ratings.
+- Estimate revenue loss caused by cancelled orders.
+- Recommend business actions to improve operational efficiency.
+
+---
+
+# Stakeholders
+
+This analysis supports decision-making for multiple business teams.
+
+| Stakeholder | Business Need |
+|-------------|---------------|
+| Operations Team | Improve delivery efficiency |
+| Regional Managers | Compare city performance |
+| Finance Team | Measure revenue leakage |
+| Customer Experience Team | Improve customer satisfaction |
+| Executive Leadership | Support operational strategy |
 
 ---
 
+# Business Questions
 
-## 🔗 Documentation
-Detailed analysis, insights, and explanations are documented in Notion.  
-🔗 [Food-Delivery-Analytics](https://www.notion.so/Food-Delivery-Crisis-Recovery-Analytics-260c4eacd6ff80909253c169a6664326?source=copy_link)
+The analysis answers the following business questions:
 
+### Platform Operations
+
+- Which cities have the highest operational capacity?
+- Is the delivery partner network sufficient relative to restaurant growth?
+
+### Revenue Performance
+
+- Which cities generate the highest revenue?
+- Which cities have the highest Average Order Value?
+- Which cuisines contribute most to platform revenue?
+
+### Operational Efficiency
+
+- What is the cancellation rate?
+- How frequently are SLA commitments breached?
+- Which cities experience the highest operational delays?
+
+### Customer Experience
+
+- Does delivery time influence customer ratings?
+- How do operational failures affect customer satisfaction?
+
+### Financial Impact
+
+- How much revenue is lost because of cancelled orders?
 
 ---
+
+# Dataset Overview
+
+The project uses a relational data model consisting of **Fact** and **Dimension** tables.
+
+### Dimension Tables
+
+- Customer
+- Restaurant
+- Delivery Partner
+- Menu Item
+
+### Fact Tables
+
+- Orders
+- Order Items
+- Delivery Performance
+- Customer Ratings
+
+The star-schema design enables scalable SQL analysis and business reporting.
+
+---
+
+# Data Model
+
+The analytical model is built around **fact_orders**, supported by operational fact tables and business dimensions.
+
+```
+Customers
+        │
+Restaurants ── Orders ── Delivery Performance
+        │
+ Menu Items
+        │
+ Ratings
+```
+
+> *(Insert ER Diagram here)*
+
+---
+
+# Analytical Framework
+
+The analysis follows four business-focused analytical modules.
+
+## 1. Platform Supply & Presence
+
+Evaluate platform coverage by analyzing:
+
+- Restaurant distribution
+- Delivery partner availability
+- City-level operational capacity
+
+---
+
+## 2. Revenue & Pricing Analysis
+
+Measure platform monetization through:
+
+- Revenue
+- Orders
+- Average Order Value
+- City comparisons
+
+---
+
+## 3. Operational Performance
+
+Evaluate service quality using:
+
+- Cancellation Rate
+- Delivery Time
+- SLA Breach Rate
+
+---
+
+## 4. Customer Experience & Revenue Impact
+
+Analyze how operational performance influences:
+
+- Customer Ratings
+- Revenue Loss
+- Customer Experience
+
+---
+
+# KPI Framework
+
+| KPI | Business Purpose |
+|------|------------------|
+| Total Orders | Demand |
+| Revenue | Financial Performance |
+| Average Order Value | Customer Spending |
+| Cancellation Rate | Operational Efficiency |
+| SLA Breach % | Delivery Reliability |
+| Average Delivery Time | Service Performance |
+| Customer Rating | Customer Experience |
+| Estimated Revenue Loss | Financial Impact |
+
+---
+
+# Key Findings
+
+## Revenue Performance
+
+- Bengaluru generated the highest revenue and order volume across the platform.
+- Mumbai and Delhi emerged as the next strongest markets.
+- Tier-2 cities demonstrated lower monetization despite healthy demand, indicating untapped revenue opportunities.
+
+---
+
+## Customer Spending Behaviour
+
+- Average Order Value remained relatively consistent across cities.
+- Revenue growth is primarily driven by higher order volumes rather than larger basket sizes.
+- Pricing behaviour suggests customers are highly price-sensitive.
+
+---
+
+## Operational Performance
+
+- Order cancellation rate reached **7.45%**.
+- **63.84%** of deliveries breached the expected SLA.
+- High-demand cities experienced the greatest absolute operational losses.
+
+---
+
+## Customer Experience
+
+Customer satisfaction declines significantly as delivery time increases.
+
+| Delivery Time | Average Rating |
+|--------------|---------------|
+| 0–30 mins | ⭐ 4.50 |
+| 31–45 mins | ⭐ 4.36 |
+| 46–60 mins | ⭐ 3.88 |
+| 60+ mins | ⭐ 2.49 |
+
+Delivery delays have a direct negative impact on customer satisfaction.
+
+---
+
+## Revenue Impact
+
+Cancelled orders resulted in an estimated revenue loss of approximately **₹3.9 Million**, demonstrating the financial cost of operational inefficiencies.
+
+---
+
+# Business Recommendations
+
+### Improve Delivery Partner Allocation
+
+Increase delivery partner availability during peak demand periods to reduce SLA breaches.
+
+**Expected Impact**
+
+- Faster deliveries
+- Improved customer ratings
+- Lower cancellation rates
+
+---
+
+### Optimize Restaurant Operations
+
+Collaborate with restaurants experiencing consistently high preparation delays.
+
+**Expected Impact**
+
+- Reduced delivery delays
+- Better operational efficiency
+
+---
+
+### Increase Basket Value
+
+Introduce city-specific promotions and bundled offers to improve Average Order Value without relying solely on increased demand.
+
+---
+
+### Prioritize High-Impact Cities
+
+Focus operational improvements in Bengaluru, Mumbai, and Delhi, where the largest share of revenue and operational losses occur.
+
+---
+
+# Business Impact
+
+The analysis demonstrates that operational efficiency is directly connected to customer experience and financial performance.
+
+Reducing delivery delays and cancellations has the potential to:
+
+- Improve customer satisfaction
+- Increase customer retention
+- Reduce revenue leakage
+- Strengthen operational efficiency
+- Support long-term business growth
+
+---
+
+# Dashboard
+
+> **Power BI Executive Dashboard**
+
+*(Insert dashboard screenshot here)*
+
+---
+
+# Tools & Technologies
+
+| Category | Technologies |
+|-----------|--------------|
+| SQL | MySQL |
+| Data Analysis | Python, Pandas |
+| Visualization | Power BI |
+| Documentation | Notion |
+| Version Control | Git, GitHub |
+
+---
+
+# Repository Structure
+
+```
+Food-Delivery-Crisis-Recovery-Analytics/
+│
+├── data/
+│   ├── raw/
+│   └── schema/
+│
+├── sql/
+│
+├── notebooks/
+│
+├── dashboard/
+│
+├── images/
+│
+├── documentation/
+│
+├── README.md
+│
+└── requirements.txt
+```
+
+---
+
+# Documentation
+
+Detailed SQL queries, methodology, analysis, and business insights are available in the project documentation.
+
+📖 **Project Documentation**
+
+https://www.notion.so/Food-Delivery-Crisis-Recovery-Analytics-260c4eacd6ff80909253c169a6664326
+
+---
+
+# Skills Demonstrated
+
+- Business Problem Solving
+- SQL Analytics
+- Exploratory Data Analysis (EDA)
+- KPI Development
+- Operational Performance Analysis
+- Customer Experience Analytics
+- Revenue Analysis
+- Dashboard Design
+- Business Storytelling
+- Data-Driven Decision Making
+
+---
+
+## About This Project
+
+This project was developed to demonstrate how data analytics can support business decision-making by transforming raw operational data into actionable insights.
+
+The case study follows an end-to-end analytics workflow, beginning with business understanding and concluding with strategic recommendations backed by quantitative analysis.
