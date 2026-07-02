@@ -48,7 +48,7 @@ The analysis is based on a relational dataset modeled using a **star schema**.
 * Delivery Performance
 * Customer Ratings
 
-> **ER Diagram:** (<img width="2342" height="2029" alt="image" src="https://github.com/user-attachments/assets/ea249cff-4706-488b-9e2b-4c9f55bb1e6a" />)
+> **ER Diagram:** <img width="2342" height="2029" alt="image" src="https://github.com/user-attachments/assets/ea249cff-4706-488b-9e2b-4c9f55bb1e6a" />
 
 ---
 
@@ -87,7 +87,7 @@ The analysis is based on a relational dataset modeled using a **star schema**.
 
 > **Power BI Executive Dashboard**
 
-(<img width="965" height="549" alt="image" src="https://github.com/user-attachments/assets/bf9ce0fd-a24f-4460-acb7-52fb31ff5bcf" />)
+<img width="965" height="549" alt="image" src="https://github.com/user-attachments/assets/bf9ce0fd-a24f-4460-acb7-52fb31ff5bcf" />
 
 ---
 
